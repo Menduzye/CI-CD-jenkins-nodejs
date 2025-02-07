@@ -18,7 +18,12 @@ app.get('/', (req, res) => {
 
 // Health-check endpoint
 app.get('/health', (req, res) => {
-  res.json({ status: 'UP' });
+  res.json({
+    status: 'UP',
+    serverIp: req.socket.localAddress,
+    epoch: Date.now(),
+    randomInt: Math.floor(Math.random() * 100) + 1
+  });
 });
 
 // A sample API endpoint (e.g., for user info)
@@ -40,4 +45,3 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
