@@ -1,0 +1,14 @@
+# Use the official Jenkins LTS image as a base
+FROM jenkins/jenkins:lts
+
+# Switch to the root user to install packages
+USER root
+
+# Install the Docker CLI (this example is for Debian/Ubuntu based images)
+RUN apt-get update && apt-get install -y docker.io
+
+# Clean up package cache to reduce image size
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Switch back to the Jenkins user
+USER jenkins
